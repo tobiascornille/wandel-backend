@@ -2,6 +2,8 @@
   "name": "wandel-backend",
   "version": "1.0.0",
   "dependencies": {
-    "@google/maps": "latest"
+    "@google/maps": "latest",
+    "express": "^4.17.1",
+    "body-parser": "latest"
   }
 }
