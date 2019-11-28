@@ -11,8 +11,8 @@ var poi = [
             },
         name: "Frankie's Hot Dogs",
         category: ['restaurant'],
-        //gDetail: <Google Maps Place Detail object>,
-        placeId: 1
+        description: "",
+        gDetail: null
     },
     {
         location:
@@ -22,8 +22,8 @@ var poi = [
             },
         name: "Alameda Park",
         category: ['park'],
-        //gDetail: <Google Maps Place Detail object>,
-        placeId: 2
+        description: "",
+        gDetail: null
     }
 ];
 
@@ -124,4 +124,48 @@ function rawDistance(p1, p2) {
 
 function deg2rad(deg) {
     return deg * (Math.PI/180)
+}
+
+
+
+/*-------------------------TEST-------------------------*/
+
+exports.test = function () {
+    populateDetail();
+
+    var stops = [
+        {},
+        poi[0],
+        poi[1],
+        {}
+    ];
+
+    var response = [
+        {
+            "routeName": "Route 1",
+            "route": gMaps.getRoute(stops),
+            "spots":
+                []
+        }
+    ];
+
+    response.spots[0] = {
+        category: poi[0].category,
+        place: poi[0].gDetail,
+        description: poi[0].description
+    };
+
+    response.spots[1] = {
+        category: poi[1].category,
+        place: poi[1].gDetail,
+        description: poi[1].description
+    };
+
+    return response;
+};
+
+function populateDetail() {
+    for (let i=0; i<poi.length; i++) {
+        poi[i]['gDetail'] = gMaps.getDetail(poi[i]);
+    }
 }
