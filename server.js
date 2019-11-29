@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-app.use(bodyParser.json()).require('./routes/poi.routes.js')(app);
+app.use(bodyParser.json())
+require('./routes/poi.routes.js')(app)
 
 const server = app.listen(8081, function () {
 

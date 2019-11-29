@@ -26,17 +26,16 @@ exports.getCoordinates = function (req) {
 
 exports.getRoute = function (req) {
     var nStops = req.length;
-    var waypointLocations = [];
+    var waypointLocations = [{optimize: true}];
     for (let i=1; i<(req.length-1); i++) {
         waypointLocations.push(req[i]['location']);
     }
     gMapsClient.directions({
-        origin: req[0].location,
-        destination: req[nStops-1].location,
-        travelMode: 'WALKING',
-        unitSystem: 'METRIC',
+        origin: req[0].location.lat.toString().concat(",", req[0].location.lng.toString()),
+        destination: req[nStops-1].location.lat.toString().concat(",", req[nStops-1].location.lng.toString()),
+        mode: 'walking',
+        units: 'metric',
         waypoints: waypointLocations,
-        optimizeWaypoints: true
     })
         .asPromise()
         .then((response) => {
@@ -50,17 +49,18 @@ exports.getRoute = function (req) {
 
 //Receives a Point of Interest and returns the place detail
 exports.getDetail = function (req) {
-    gMapsClient.findPlace({
+    gMapsClient.placesNearby({
         location: {
             latitude: req.location.lat,
             longitude: req.location.lng
         },
-        keyword: req.name,
+        radius: 10,
         rankby: 'distance',
-        fields: [
+        keyword: req.name,
+        /*fields: [
             'geometry', 'geometry/location', 'geometry/location/lat',
             'geometry/location/lng', 'icon', 'id', 'name', 'place_id'
-        ]
+        ]*/
     })
         .asPromise()
         .then((response) => {

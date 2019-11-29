@@ -1,4 +1,5 @@
 const gMaps = require('../external/google.maps');
+var fs = require('fs');
 
 //This module implements all logic of choosing which POI(s) to visit
 
@@ -11,7 +12,7 @@ var poi = [
             },
         name: "Frankie's Hot Dogs",
         category: ['restaurant'],
-        description: "",
+        description: "Hot Dog restaurant.",
         gDetail: null
     },
     {
@@ -22,7 +23,7 @@ var poi = [
             },
         name: "Alameda Park",
         category: ['park'],
-        description: "",
+        description: "Large green space.",
         gDetail: null
     }
 ];
@@ -130,42 +131,65 @@ function deg2rad(deg) {
 
 /*-------------------------TEST-------------------------*/
 
-exports.test = function () {
-    populateDetail();
-
-    var stops = [
-        {},
-        poi[0],
-        poi[1],
-        {}
-    ];
-
-    var response = [
-        {
-            "routeName": "Route 1",
-            "route": gMaps.getRoute(stops),
-            "spots":
-                []
-        }
-    ];
-
-    response.spots[0] = {
-        category: poi[0].category,
-        place: poi[0].gDetail,
-        description: poi[0].description
-    };
-
-    response.spots[1] = {
-        category: poi[1].category,
-        place: poi[1].gDetail,
-        description: poi[1].description
-    };
-
-    return response;
-};
 
 function populateDetail() {
     for (let i=0; i<poi.length; i++) {
         poi[i]['gDetail'] = gMaps.getDetail(poi[i]);
     }
 }
+
+exports.test = function () {
+    populateDetail();
+
+    var stops = [
+        {
+            location: {
+                lat: 38.737846,
+                lng: -9.141079
+            }
+        },
+        poi[0],
+        poi[1],
+        {
+            location: {
+                lat: 38.736843,
+                lng: -9.130750
+            }
+        }
+    ];
+
+    var response = [
+        {
+            routeName: "Route 1",
+            route: null,
+            spots:
+                []
+        }
+    ];
+
+    response.route = gMaps.getRoute(stops);
+
+    if (response.spots === undefined) {       //if t=undefined, call tt
+        console.log(response.spots)      //call t
+    }
+
+    response.spots = [{
+        category: poi[0].category,
+        place: poi[0].gDetail,
+        description: poi[0].description
+    }];
+
+    response.spots.push({
+        category: poi[1].category,
+        place: poi[1].gDetail,
+        description: poi[1].description
+    });
+
+    var jsonData = JSON.stringify(response);
+    fs.writeFile("test.txt", jsonData, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    //return response;
+};
