@@ -1,0 +1,371 @@
+[
+  {
+    "location": {
+      "lat":38.737291,
+      "lng":-9.1414564
+    },
+    "name":"Frankie's Hot Dogs",
+    "category":["restaurant"],
+    "description":"Hot Dog restaurant.",
+    "gDetail": {
+      "place_id":"ChIJIw8HeqEzGQ0RuomSM-EsDHM",
+      "rating":4.4
+    }
+  },
+  {
+    "location": {
+      "lat":38.7380658,
+      "lng":-9.1410818
+    },
+    "name":"Vasco da Gama",
+    "category":["restaurant"],
+    "description":"Sells food.",
+    "gDetail": {
+      "place_id":"ChIJcW0JQaEzGQ0RKEggtqJAq5Q",
+      "rating":4.3
+    }
+  },
+  {
+    "location": {
+      "lat":38.735157,
+      "lng":-9.1399591
+    },
+    "name":"Casa Indiana",
+    "category":["restaurant"],
+    "description":"Sells food.",
+    "gDetail": {
+      "place_id":"ChIJv-e-HqIzGQ0RJZMiaEEdxJ8",
+      "rating":4.4
+    }
+  },
+  {
+    "location": {
+      "lat":38.7341591,
+      "lng":-9.1362875
+    },
+    "name":"Nova Arcádia",
+    "category":["restaurant"],
+    "description":"Sells food.",
+    "gDetail": {
+      "place_id":"ChIJd-GcdpgzGQ0RvzMIFon1rCI",
+      "rating":4.4
+    }
+  },
+  {
+    "location": {
+      "lat":38.7339687,
+      "lng":-9.1412076
+    },
+    "name":"Mãe Restaurante",
+    "category":["restaurant"],
+    "description":"Sells food.",
+    "gDetail": {
+      "place_id":"ChIJnZpgX58zGQ0RvxKOOpQuubA",
+      "rating":4.7
+    }
+  },
+
+  {
+    "location": {
+      "lat" : 38.7359669,
+      "lng" : -9.142264599999999
+    },
+    "name" : "Jardim do Arco do Cego",
+    "category":["park"],
+    "description":"Place with green stuff.",
+    "gDetail": {
+      "place_id":"ChIJi4Sjr6EzGQ0Rs_GrSBhA8kI",
+      "rating":4.1
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7408853,
+      "lng" : -9.137386100000001
+    },
+    "name" : "London Square Garden",
+    "category":["park"],
+    "description":"Place with green stuff.",
+    "gDetail": {
+      "place_id" : "ChIJbR2XX6QzGQ0RUKG5NkcnXww",
+      "rating":3.9
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7407768,
+      "lng" : -9.1356079
+    },
+    "name" : "Parque do Fumo",
+    "category":["park"],
+    "description":"Place with green stuff.",
+    "gDetail": {
+      "place_id" : "ChIJNTAjqgYzGQ0RuwyDSCiMTUw",
+      "rating":5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7371269,
+      "lng" : -9.132758899999999
+    },
+    "name" : "Alameda Dom Afonso Henriques",
+    "category":["park"],
+    "description":"Place with green stuff.",
+    "gDetail": {
+      "place_id" : "ChIJz9YTq70zGQ0RXjBJxK4QzLY",
+      "rating":4.4
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7368362,
+      "lng" : -9.1538524
+    },
+    "name" : "Garden of the Calouste Gulbenkian Foundation",
+    "category":["park"],
+    "description":"Place with green stuff.",
+    "gDetail": {
+      "place_id" : "ChIJJRmh5w0zGQ0RovfaFjTXQk4",
+      "rating":4.7
+    }
+  },
+
+  {
+    "location": {
+      "lat" : 38.726087,
+      "lng" : -9.1315387
+    },
+    "name" : "Viewpoint of Monte Agudo",
+    "category":["viewpoint"],
+    "description":"You can look at things here.",
+    "gDetail": {
+      "place_id" : "ChIJQzXGs5EzGQ0RAytgn6leEcM",
+      "rating":4.5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7302994,
+      "lng" : -9.154429799999999
+    },
+    "name" : "Observation Deck Park Eduardo VII",
+    "category":["viewpoint"],
+    "description":"You can look at things here.",
+    "gDetail": {
+      "place_id" : "ChIJeXctVnIzGQ0RNfNVqdSTjO4",
+      "rating":4.6
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.719186,
+      "lng" : -9.1328388
+    },
+    "name" : "Miradouro da Senhora do Monte",
+    "category":["viewpoint"],
+    "description":"You can look at things here.",
+    "gDetail": {
+      "place_id" : "ChIJV32DNI8zGQ0R9GqiWeuNH2E",
+      "rating":4.7
+    }
+  },
+
+  {
+    "location": {
+      "lat" : 38.7376808,
+      "lng" : -9.138488599999999
+    },
+    "name" : "Museu Faraday",
+    "category":["museum"],
+    "description":"Sciency/artsy stuff here.",
+    "gDetail": {
+      "place_id" : "ChIJrQEcvQgzGQ0R9VpMwre1In0",
+      "rating":5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7350647,
+      "lng" : -9.141438599999999
+    },
+    "name" : "Antiga Casa dos estudantes do Império",
+    "category":["museum"],
+    "description":"Sciency/artsy stuff here.",
+    "gDetail": {
+      "place_id" : "ChIJ-5hwRWAzGQ0RWLzWeZC4-hA",
+      "rating":0
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.728687,
+      "lng" : -9.132900899999999
+    },
+    "name" : "Roundabout.Lx",
+    "category":["museum"],
+    "description":"Sciency/artsy stuff here.",
+    "gDetail": {
+      "place_id" : "ChIJ_e9pxpAzGQ0RG7VEtFWycqU",
+      "rating":4.1
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7378124,
+      "lng" : -9.153545500000002
+    },
+    "name" : "Museu Calouste Gulbenkian",
+    "category":["museum"],
+    "description":"Sciency/artsy stuff here.",
+    "gDetail": {
+      "place_id" : "ChIJNTZ10A0zGQ0ROwhyCh2mkwg",
+      "rating":4.7
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7242472,
+      "lng" : -9.142012899999999
+    },
+    "name" : "Outsider Art Museum",
+    "category":["museum"],
+    "description":"Sciency/artsy stuff here.",
+    "gDetail": {
+      "place_id" : "ChIJ66gzOIMzGQ0RKWj8jBAg7ew",
+      "rating":3
+    }
+  },
+
+  {
+    "location": {
+      "lat" : 38.7379328,
+      "lng" : -9.140955399999999
+    },
+    "name" : "Statue of António José de Almeida",
+    "category":["landmark"],
+    "description":"Cool thing to look at.",
+    "gDetail": {
+      "place_id":"ChIJi4Sjr6EzGQ0Rs_GrSBhA8kI",
+      "rating":4.1
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7343763,
+      "lng" : -9.134798199999999
+    },
+    "name" : "Convento de Arroios",
+    "category":["landmark"],
+    "description":"Cool thing to look at.",
+    "gDetail": {
+      "place_id" : "ChIJLyDbM6YzGQ0RJtXTT5qmcbo",
+      "rating":3
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.733652,
+      "lng" : -9.1341973
+    },
+    "name" : "Estátua de Fernão de Magalhães",
+    "category":["landmark"],
+    "description":"Cool thing to look at.",
+    "gDetail": {
+      "place_id" : "ChIJ-3bE9pczGQ0RZW-kI-AK11E",
+      "rating":3.7
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.737319,
+      "lng" : -9.1304269
+    },
+    "name" : "Fonte Luminosa",
+    "category":["landmark"],
+    "description":"Cool thing to look at.",
+    "gDetail": {
+      "place_id" : "ChIJ8zZktb0zGQ0R9AaApCgQmPo",
+      "rating":4.5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7422955,
+      "lng" : -9.133324999999999
+    },
+    "name" : "Monumento a Francisco Sá Carneiro",
+    "category":["landmark"],
+    "description":"Cool thing to look at.",
+    "gDetail": {
+      "place_id" : "ChIJEeJeILszGQ0R5Ai5Q-od9Xk",
+      "rating":4
+    }
+  },
+
+  {
+    "location": {
+      "lat" : 38.7342433,
+      "lng" : -9.139529099999999
+    },
+    "name" : "Igreja Luterana de Portugal",
+    "category":["church"],
+    "description":"Cool thing to look at?",
+    "gDetail": {
+      "place_id" : "ChIJQaivB6IzGQ0RUJ3j_neRQEo",
+      "rating":5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.74044689999999,
+      "lng" : -9.1376446
+    },
+    "name" : "Church São João de Deus",
+    "category":["church"],
+    "description":"Cool thing to look at?",
+    "gDetail": {
+      "place_id" : "ChIJ9WudbqQzGQ0RUg1__kJz7kM",
+      "rating":4.4
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7330683,
+      "lng" : -9.136470299999999
+    },
+    "name" : "Церковь Иисуса Христа",
+    "category":["church"],
+    "description":"Cool thing to look at?",
+    "gDetail": {
+      "place_id" : "ChIJFdgraJgzGQ0RJ1c2BPKLtiQ",
+      "rating":5
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7388209,
+      "lng" : -9.1335113
+    },
+    "name" : "Igreja Batista Renovada Lisboa",
+    "category":["church"],
+    "description":"Cool thing to look at?",
+    "gDetail": {
+      "place_id" : "ChIJZ13_u7wzGQ0Run9tk11Uw_Q",
+      "rating":4.8
+    }
+  },
+  {
+    "location": {
+      "lat" : 38.7325156,
+      "lng" : -9.1362855
+    },
+    "name" : "Church São Jorge de Arroios",
+    "category":["church"],
+    "description":"Cool thing to look at?",
+    "gDetail": {
+      "place_id" : "ChIJhefsSJgzGQ0Rl5dx38ueo-Y",
+      "rating":4.1
+    }
+  }
+]

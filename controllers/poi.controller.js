@@ -2,35 +2,11 @@ const gMaps = require('../external/google.maps');
 var fs = require('fs');
 
 //This module implements all logic of choosing which POI(s) to visit
-
-var poi = [
-    {
-        location:
-            {
-                lat:  38.7367036,
-                lng:  -9.1383635
-            },
-        name: "Frankie's Hot Dogs",
-        category: ['restaurant'],
-        description: "Hot Dog restaurant.",
-        gDetail: null
-    },
-    {
-        location:
-            {
-                lat:  38.736988,
-                lng:  -9.135464
-            },
-        name: "Alameda Park",
-        category: ['park'],
-        description: "Large green space.",
-        gDetail: null
-    }
-];
+var data = fs.readFileSync('poi.json', 'utf-8');
+const poi = JSON.parse(data);
 
 exports.routes = function(req, res) {
     var json_request = req.body;
-
     //resolve destination coordinates
     json_request['destination'] = gMaps.getCoordinates(json_request['destination']);
 
@@ -60,7 +36,23 @@ exports.routes = function(req, res) {
         }
     ];
 
-    //TODO: add spot information from the poi list to the res object
+    var spotsContent = [];
+    for (let i=1; i<(stops[0].length-1); i++) {
+        spotsContent.push(stops[0][i]);
+    }
+    res[0].spots = spotsContent;
+
+    spotsContent = [];
+    for (let i=1; i<(stops[1].length-1); i++) {
+        spotsContent.push(stops[1][i]);
+    }
+    res[1].spots = spotsContent;
+
+    spotsContent = [];
+    for (let i=1; i<(stops[2].length-1); i++) {
+        spotsContent.push(stops[2][i]);
+    }
+    res[2].spots = spotsContent;
 
     return res;
 };
@@ -133,19 +125,27 @@ function deg2rad(deg) {
 
 
 function populateDetail() {
-    for (let i=0; i<poi.length; i++) {
-        poi[i]['gDetail'] = gMaps.getDetail(poi[i]);
+    var temp = fs.readFile("poi.json");
+    for (let i=0; i<temp.length; i++) {
+        temp[i]['gDetail'] = gMaps.getDetail(poi[i]);
     }
+    var poiData = JSON.stringify(temp);
+    fs.writeFile("poi.json", poiData, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+
 }
 
 exports.test = function () {
-    populateDetail();
+    //populateDetail();
 
-    var stops = [
+    /*var stops = [
         {
-            location: {
-                lat: 38.737846,
-                lng: -9.141079
+            location: { //38.7377939,-9.1380037
+                lat: 38.7377939,
+                lng: -9.1380037
             }
         },
         poi[0],
@@ -191,5 +191,5 @@ exports.test = function () {
             console.log(err);
         }
     });
-    //return response;
+    //return response;*/
 };
