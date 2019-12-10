@@ -1,9 +1,12 @@
+const axios = require('axios');
 const Promise = require('promise');
 const key = require('../key');
 const gMapsClient = require('@google/maps').createClient({
     key: key.getKey(),
     Promise: Promise
 });
+
+//TODO: Change API calls to build valid url and use axios.get(), and add argument typechecking
 
 function asArray(arg) {
     return Array.isArray(arg) ? arg : [arg];
@@ -21,7 +24,31 @@ function latLng(arg) {
 }
 
 exports.getCoordinates = function (req) {
-    gMapsClient.findPlace({
+    //https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters
+    var requestJSON = {
+        input: req,
+        inputtype: 'textquery',
+        language: 'pt',
+        fields: [
+            'geometry', 'geometry/location', 'geometry/location/lat',
+            'geometry/location/lng', 'name', 'place_id'
+        ]
+    };
+    var url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ requestJSON.input + '&inputtype=' + requestJSON.inputtype + '&language=' + requestJSON.language + '&fields=' + requestJSON.fields.toString() + '&key=' + key.getKey();
+    console.log('Request URL:\n' + url);
+    return url;
+    /*console.log('pre-request\n');
+    axios.get(url)
+        .then((response) => {
+            console.log('post-response\n');
+            console.log(response.json.results[0]['location']);
+            return response.json.results[0]['location'];
+        })
+        .catch((err) => {
+            console.log(err);
+        });*/
+
+    /*gMapsClient.findPlace({
         input: req,
         inputtype: 'textquery',
         language: 'pt',
@@ -37,29 +64,43 @@ exports.getCoordinates = function (req) {
         })
         .catch((err) => {
             console.log(err);
-        });
+        });*/
 };
 
 exports.getRoute = function (req) {
     //https://maps.googleapis.com/maps/api/directions/json?destination=38.736843%2C-9.13075&mode=walking&origin=38.7377939%2C-9.1380037&un%20its=metric&waypoints=38.7367036%2C-9.1383635%7C38.736988%2C-9.135464&optimize=true&key=AIzaSyD6h_ZyaegKrsj5GnVfkyO41Ax4DuAzMho
     var nStops = req.length;
-    var waypointLocations = [];
-    for (let i=1; i<(req.length-1); i++) {
-        waypointLocations.push(latLng(req[i]['location']));
+    if (req.length>2) { //if the path has intermediate stops
+        var waypointLocations = [];
+        for (let i=1; i<(req.length-1); i++) {
+            waypointLocations.push(latLng(req[i].location));
+        }
+        var requestJSON = {
+            origin: req[0].location.lat.toString().concat(",", req[0].location.lng.toString()),
+            destination: req[nStops-1].location.lat.toString().concat(",", req[nStops-1].location.lng.toString()),
+            mode: 'walking',
+            units: 'metric',
+            waypoints: waypointLocations,
+            /*[
+                waypointLocations[0],
+                waypointLocations[1]
+            ],*/
+            optimize: true
+        };
+        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&waypoints='+requestJSON.waypoints.toString()+'&optimize='+requestJSON.optimize.toString()+'&key='+key.getKey();
+    } else {
+        var requestJSON = {
+            origin: req[0].location.lat.toString().concat(",", req[0].location.lng.toString()),
+            destination: req[nStops-1].location.lat.toString().concat(",", req[nStops-1].location.lng.toString()),
+            mode: 'walking',
+            units: 'metric',
+            optimize: true
+        };
+        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&optimize='+requestJSON.optimize.toString()+'&key='/*+ key.getKey()*/;
+
     }
-    var requestJSON = {
-        origin: req[0].location.lat.toString().concat(",", req[0].location.lng.toString()),
-        destination: req[nStops-1].location.lat.toString().concat(",", req[nStops-1].location.lng.toString()),
-        mode: 'walking',
-        units: 'metric',
-        waypoints: [
-            waypointLocations[0],
-            waypointLocations[1]
-        ],
-        optimize: true
-    };
-    console.log('\nRoute Request:\n');
-    console.log(requestJSON);
+    //console.log('\nRoute Request:\n');
+    //console.log(requestJSON);
     /*gMapsClient.directions(requestJSON)
         .asPromise()
         .then((response) => {
@@ -70,7 +111,6 @@ exports.getRoute = function (req) {
         .catch((err) => {
             console.log(err);
         });*/
-    var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&waypoints='+requestJSON.waypoints.toString()+'&optimize='+requestJSON.optimize.toString()+'&key='/*+ key.getKey()*/;
     console.log(url);
     return url;
 };
