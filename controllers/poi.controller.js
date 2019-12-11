@@ -11,14 +11,13 @@ exports.getRoutes = function(req, res) {
   var destCoordsUrl = gMaps.getCoordinates(json_request.destination);
   axios.get(destCoordsUrl)
       .then((response) => {
-        console.log(response.data.candidates[0].geometry.location);
         json_request.destination = response.data.candidates[0].geometry.location;
         var stops = stopList(testRequest);
         var route1 = gMaps.getRoute(stops[0]);
         var route2 = gMaps.getRoute(stops[1]);
         var route3 = gMaps.getRoute(stops[2]);
 
-        var res = [
+        var result = [
           {
             routeName: "Route 1",
             route: route1,
@@ -40,21 +39,21 @@ exports.getRoutes = function(req, res) {
         for (let i = 1; i < stops[0].length - 1; i++) {
           spotsContent.push(stops[0][i]);
         }
-        res[0].spots = spotsContent;
+        result[0].spots = spotsContent;
 
         spotsContent = [];
         for (let i = 1; i < stops[1].length - 1; i++) {
           spotsContent.push(stops[1][i]);
         }
-        res[1].spots = spotsContent;
+        result[1].spots = spotsContent;
 
         spotsContent = [];
         for (let i = 1; i < stops[2].length - 1; i++) {
           spotsContent.push(stops[2][i]);
         }
-        res[2].spots = spotsContent;
+        result[2].spots = spotsContent;
 
-        return res;
+        return res.send(result);
       })
       .catch((err) => {
         console.log(err);
