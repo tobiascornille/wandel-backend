@@ -1,16 +1,14 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+const poi = require('../controllers/poi.controller.js');
+
 const PORT = process.env.PORT || 5000
 
+const app = express();
 app.use(bodyParser.json())
-require('./routes/poi.routes.js')(app)
 
-const server = app.listen(PORT, function () {
+app.post('/routes', poi.getRoutes);
+app.get('/test', poi.test);
 
-    var host = server.address().address;
-    var port = server.address().port;
 
-    console.log("Listening at http://%s:%s", host, port)
-
-});
+const server = app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
