@@ -546,8 +546,8 @@ function stopList(req, res) {
 
   var finalReturn = [finalPath1, finalPath2, finalPath3];
 
-  console.log("final return");
-  console.log(finalReturn);
+  // console.log("final return");
+  // console.log(finalReturn);
   // to view all data in console use :
   // console.log("finalPath1");
   // console.log(finalPath1);
@@ -622,10 +622,10 @@ point should be of structure:
 }
 */
 function rawDistance(p1, p2) {
-  console.log("p1:\n");
-  console.log(p1);
-  console.log("p2:\n");
-  console.log(p2);
+  //console.log("p1:\n");
+  //console.log(p1);
+  //console.log("p2:\n");
+  //console.log(p2);
   var R = 6371000; // Radius of the earth in m
   var lat1 = p1["lat"];
   var lng1 = p1["lng"];
