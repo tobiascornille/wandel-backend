@@ -109,7 +109,7 @@ function stopList(req, res) {
     viewpoint: req.preferences.Viewpoints,
     museum: req.preferences.Museums,
     landmark: req.preferences.Landmarks,
-    church: req.preferences.Architecture
+    church: false
   };
   // console.log(req);
   var originDestDistance = rawDistance(req.origin, req.destination);
