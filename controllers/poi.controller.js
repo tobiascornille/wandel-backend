@@ -21,17 +21,17 @@ exports.getRoutes = function(req, res) {
           {
             routeName: "Route 1",
             route: route1,
-            spots: spots[0]
+            spots: stops[0]
           },
           {
             routeName: "Route 2",
             route: route2,
-            spots: spots[1]
+            spots: stops[1]
           },
           {
             routeName: "Route 3",
             route: route3,
-            spots: spots[2]
+            spots: stops[2]
           }
         ];
     
