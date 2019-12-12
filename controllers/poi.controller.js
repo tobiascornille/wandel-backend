@@ -1,64 +1,50 @@
 const gMaps = require("../external/google.maps");
+const axios = require('axios');
 var fs = require("fs");
 
 //This module implements all logic of choosing which POI(s) to visit
 var data = fs.readFileSync("poi.json", "utf-8");
 const poi = JSON.parse(data);
 
-exports.routes = function(req, res) {
+exports.getRoutes = function(req, res) {
   var json_request = req.body;
-  //resolve destination coordinates
-  json_request["destination"] = gMaps.getCoordinates(
-    json_request["destination"]
-  );
+  var destCoordsUrl = gMaps.getCoordinates(json_request.destination);
+  axios.get(destCoordsUrl)
+      .then((response) => {
+        json_request.destination = response.data.candidates[0].geometry.location;
+        var stops = stopList(json_request);
+        var route1 = gMaps.getRoute(json_request.origin, json_request.destination, stops[0]);
+        var route2 = gMaps.getRoute(json_request.origin, json_request.destination, stops[1]);
+        var route3 = gMaps.getRoute(json_request.origin, json_request.destination, stops[2]);
 
-  var stops = stopList(json_request);
-  var route1 = gMaps.getRoute(stops[0]);
-  var route2 = gMaps.getRoute(stops[1]);
-  var route3 = gMaps.getRoute(stops[2]);
-
-  res = [
-    {
-      routeName: "Route 1",
-      route: route1,
-      spots: []
-    },
-    {
-      routeName: "Route 2",
-      route: route2,
-      spots: []
-    },
-    {
-      routeName: "Route 3",
-      route: route3,
-      spots: []
-    }
-  ];
-
-  var spotsContent = [];
-  for (let i = 1; i < stops[0].length - 1; i++) {
-    spotsContent.push(stops[0][i]);
-  }
-  res[0].spots = spotsContent;
-
-  spotsContent = [];
-  for (let i = 1; i < stops[1].length - 1; i++) {
-    spotsContent.push(stops[1][i]);
-  }
-  res[1].spots = spotsContent;
-
-  spotsContent = [];
-  for (let i = 1; i < stops[2].length - 1; i++) {
-    spotsContent.push(stops[2][i]);
-  }
-  res[2].spots = spotsContent;
-
-  return res;
+        var result = [
+          {
+            routeName: "Route 1",
+            route: route1,
+            spots: stops[0]
+          },
+          {
+            routeName: "Route 2",
+            route: route2,
+            spots: stops[1]
+          },
+          {
+            routeName: "Route 3",
+            route: route3,
+            spots: stops[2]
+          }
+        ];
+    
+        return res.send(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 };
 
 // stopList receives a request of structure:
-//30 min 2 parck 1museum
-var requestTest = {
+//30 min 2 park 1museum
+var testRequest = {
   origin: {
     lat: 38.7378802,
     lng: -9.1394186
@@ -77,41 +63,18 @@ var requestTest = {
   }
 };
 
-var request = {
-  origin: {
-    lat: 38.7378802,
-    lng: -9.1394186
-  },
-  destination: {
-    lat: 38.737671,
-    lng: -9.1627037
-  },
-  preferences: {
-    Architecture: true,
-    Landmarks: false,
-    "Local Cuisine": true,
-    Museums: false,
-    Parks: true,
-    "Street Art": true,
-    Viewpoints: true
-  }
-};
-
 // and returns a set of 3 lists of poi,
 // each set is bigger than the previous one and each set is contained by the following set.
 
-function stopList(req, res) {
-  // console.log("stop list test");
-  // console.log(req);
+function stopList(req) {
   req.preferences = {
     restaurant: req.preferences["Local Cuisine"],
     park: req.preferences.Parks,
     viewpoint: req.preferences.Viewpoints,
     museum: req.preferences.Museums,
     landmark: req.preferences.Landmarks,
-    church: false
+    church: false,
   };
-  // console.log(req);
   var originDestDistance = rawDistance(req.origin, req.destination);
   var rawdata = fs.readFileSync("poi.json");
   let allPoint = JSON.parse(rawdata);
@@ -649,6 +612,10 @@ point should be of structure:
 }
 */
 function rawDistance(p1, p2) {
+  //console.log("p1:\n");
+  //console.log(p1);
+  //console.log("p2:\n");
+  //console.log(p2);
   var R = 6371000; // Radius of the earth in m
   var lat1 = p1["lat"];
   var lng1 = p1["lng"];
@@ -686,58 +653,56 @@ function populateDetail() {
 }
 
 exports.test = function() {
-  stopList(request);
-  //populateDetail();
+  testRequest.destination = 'Cais do Sodre';
+  var destCoordsUrl = gMaps.getCoordinates(testRequest.destination);
+  axios.get(destCoordsUrl)
+      .then((response) => {
+        console.log(response.data.candidates[0].geometry.location);
+        testRequest.destination = response.data.candidates[0].geometry.location;
+        var stops = stopList(testRequest);
+        var route1 = gMaps.getRoute(stops[0]);
+        var route2 = gMaps.getRoute(stops[1]);
+        var route3 = gMaps.getRoute(stops[2]);
 
-  /*var stops = [
-        {
-            location: { //38.7377939,-9.1380037
-                lat: 38.7377939,
-                lng: -9.1380037
-            }
-        },
-        poi[0],
-        poi[1],
-        {
-            location: {
-                lat: 38.736843,
-                lng: -9.130750
-            }
-        }
-    ];
-
-    var response = [
-        {
+        var res = [
+          {
             routeName: "Route 1",
-            route: null,
-            spots:
-                []
+            route: route1,
+            spots: []
+          },
+          {
+            routeName: "Route 2",
+            route: route2,
+            spots: []
+          },
+          {
+            routeName: "Route 3",
+            route: route3,
+            spots: []
+          }
+        ];
+
+        var spotsContent = [];
+        for (let i = 1; i < stops[0].length - 1; i++) {
+          spotsContent.push(stops[0][i]);
         }
-    ];
+        res[0].spots = spotsContent;
 
-    response.route = gMaps.getRoute(stops);
-
-    if (response.spots === undefined) {       //if t=undefined, call tt
-        console.log(response.spots)      //call t
-    }
-
-    response.spots = [{
-        category: poi[0].category,
-        place: poi[0].gDetail,
-        description: poi[0].description
-    }];
-
-    response.spots.push({
-        category: poi[1].category,
-        place: poi[1].gDetail,
-        description: poi[1].description
-    });
-
-    var jsonData = JSON.stringify(response);
-    fs.writeFile("test.txt", jsonData, function(err) {
-        if (err) {
-            console.log(err);
+        spotsContent = [];
+        for (let i = 1; i < stops[1].length - 1; i++) {
+          spotsContent.push(stops[1][i]);
         }
-    });
-    //return response;*/
+        res[1].spots = spotsContent;
+
+        spotsContent = [];
+        for (let i = 1; i < stops[2].length - 1; i++) {
+          spotsContent.push(stops[2][i]);
+        }
+        res[2].spots = spotsContent;
+
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 };
