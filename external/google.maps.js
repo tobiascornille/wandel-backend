@@ -77,7 +77,7 @@ exports.getRoute = function(origin, destination, stops) {
     const baseUrl = `https://maps.googleapis.com/maps/api/directions/json?destination=${destinationString}&mode=${mode}&origin=${originString}&un%20its=${units}`;
     const url =
     stops.length > 0
-      ? `${baseUrl}&waypoints=optimize:${optimize}|${waypointLocations}`
+      ? `${baseUrl}&waypoints=optimize:${optimize}${waypointLocations}`
       : baseUrl;
     return url;
 
