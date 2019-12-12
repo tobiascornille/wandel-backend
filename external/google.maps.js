@@ -69,12 +69,12 @@ exports.getCoordinates = function(origin, destination, stops) {
 exports.getRoute = function(origin, destination, stops) {
     //https://maps.googleapis.com/maps/api/directions/json?destination=38.736843%2C-9.13075&mode=walking&origin=38.7377939%2C-9.1380037&un%20its=metric&waypoints=38.7367036%2C-9.1383635%7C38.736988%2C-9.135464&optimize=true&key=AIzaSyD6h_ZyaegKrsj5GnVfkyO41Ax4DuAzMho
     const originString = `${origin.lat},${origin.lng}`;
-    const destination = `${destination.lat},${destination.lng}`;
+    const destinationString = `${destination.lat},${destination.lng}`;
     const mode = "walking";
     const units = "metric";
     const waypointLocations = stops.map(stop => latLng(stop.location));
     const optimize = true;
-    const baseUrl = `https://maps.googleapis.com/maps/api/directions/json?destination=${destination}&mode=${mode}&origin=${originString}&un%20its=${units}`;
+    const baseUrl = `https://maps.googleapis.com/maps/api/directions/json?destination=${destinationString}&mode=${mode}&origin=${originString}&un%20its=${units}`;
     const url =
     stops > 0
       ? `${baseUrl}&waypoints=${waypointLocations}&optimize=${optimize}`
