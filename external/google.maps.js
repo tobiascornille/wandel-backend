@@ -72,7 +72,7 @@ exports.getRoute = function(origin, destination, stops) {
     const destinationString = `${destination.lat},${destination.lng}`;
     const mode = "walking";
     const units = "metric";
-    const waypointLocations = stops.reduce((acc, { location }) => `${acc}|${latLng(location)}`);
+    const waypointLocations = stops.reduce((acc, { location }) => `${acc}|${latLng(location)}`, '');
     const optimize = true;
     const baseUrl = `https://maps.googleapis.com/maps/api/directions/json?destination=${destinationString}&mode=${mode}&origin=${originString}&un%20its=${units}`;
     const url =
