@@ -13,9 +13,9 @@ exports.getRoutes = function(req, res) {
       .then((response) => {
         json_request.destination = response.data.candidates[0].geometry.location;
         var stops = stopList(json_request);
-        var route1 = gMaps.getRoute(stops[0]);
-        var route2 = gMaps.getRoute(stops[1]);
-        var route3 = gMaps.getRoute(stops[2]);
+        var route1 = gMaps.getRoute(json_request.origin, json_request.destination, stops[0]);
+        var route2 = gMaps.getRoute(json_request.origin, json_request.destination, stops[1]);
+        var route3 = gMaps.getRoute(json_request.origin, json_request.destination, stops[2]);
 
         var result = [
           {
@@ -84,7 +84,7 @@ var testRequest = {
 // and returns a set of 3 lists of poi,
 // each set is bigger than the previous one and each set is contained by the following set.
 
-function stopList(req, res) {
+function stopList(req) {
   var originDestDistance = rawDistance(req.origin, req.destination);
   var rawdata = fs.readFileSync("poi.json");
   let allPoint = JSON.parse(rawdata);
