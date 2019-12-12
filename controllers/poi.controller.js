@@ -21,38 +21,20 @@ exports.getRoutes = function(req, res) {
           {
             routeName: "Route 1",
             route: route1,
-            spots: []
+            spots: spots[0]
           },
           {
             routeName: "Route 2",
             route: route2,
-            spots: []
+            spots: spots[1]
           },
           {
             routeName: "Route 3",
             route: route3,
-            spots: []
+            spots: spots[2]
           }
         ];
-
-        var spotsContent = [];
-        for (let i = 1; i < stops[0].length - 1; i++) {
-          spotsContent.push(stops[0][i]);
-        }
-        result[0].spots = spotsContent;
-
-        spotsContent = [];
-        for (let i = 1; i < stops[1].length - 1; i++) {
-          spotsContent.push(stops[1][i]);
-        }
-        result[1].spots = spotsContent;
-
-        spotsContent = [];
-        for (let i = 1; i < stops[2].length - 1; i++) {
-          spotsContent.push(stops[2][i]);
-        }
-        result[2].spots = spotsContent;
-
+    
         return res.send(result);
       })
       .catch((err) => {
