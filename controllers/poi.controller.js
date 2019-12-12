@@ -12,7 +12,7 @@ exports.getRoutes = function(req, res) {
   axios.get(destCoordsUrl)
       .then((response) => {
         json_request.destination = response.data.candidates[0].geometry.location;
-        var stops = stopList(testRequest);
+        var stops = stopList(json_request);
         var route1 = gMaps.getRoute(stops[0]);
         var route2 = gMaps.getRoute(stops[1]);
         var route3 = gMaps.getRoute(stops[2]);
