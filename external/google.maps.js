@@ -87,7 +87,7 @@ exports.getRoute = function (req) {
             ],*/
             optimize: true
         };
-        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&waypoints='+requestJSON.waypoints.toString()+'&optimize='+requestJSON.optimize.toString()+'&key='+key.getKey();
+        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&waypoints='+requestJSON.waypoints.toString()+'&optimize='+requestJSON.optimize.toString();
     } else {
         var requestJSON = {
             origin: req[0].location.lat.toString().concat(",", req[0].location.lng.toString()),
@@ -96,7 +96,7 @@ exports.getRoute = function (req) {
             units: 'metric',
             optimize: true
         };
-        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&optimize='+requestJSON.optimize.toString()+'&key='/*+ key.getKey()*/;
+        var url = 'https://maps.googleapis.com/maps/api/directions/json?destination='+requestJSON.destination.toString()+'&mode='+requestJSON.mode+'&origin='+requestJSON.origin.toString()+'&un%20its='+requestJSON.units+'&optimize='+requestJSON.optimize.toString();
 
     }
     //console.log('\nRoute Request:\n');
