@@ -23,7 +23,7 @@ function latLng(arg) {
     return asArray(arg).join(',');
 }
 
-exports.getCoordinates = function(origin, destination, stops) {
+exports.getCoordinates = function(req) {
     //https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters
     var requestJSON = {
         input: req,
